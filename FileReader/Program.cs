@@ -13,21 +13,21 @@ namespace FileReader
             {
                 string inputClaimFilePath = @"D:\inpClaims.txt";
                 string inputProviderFilePath = @"D:\inpProvider.txt";
-                if (!File.Exists(inputClaimFilePath) || !File.Exists(inputProviderFilePath))
-                {
+                while(!File.Exists(inputClaimFilePath) || !File.Exists(inputProviderFilePath))
+                { 
                     Console.WriteLine("Either or both of the files do not exist in the specified path.");
-                    Console.ReadLine();
+                    Console.WriteLine("Please enter the full path of input claim file");
+                    inputClaimFilePath = Console.ReadLine();
+                    Console.WriteLine("Please enter the full path of input provider file");
+                    inputProviderFilePath =Console.ReadLine();
                 }
-                else
-                {
-                    string folder = @"C:\Temp";
-                    bool folderExists = Directory.Exists(folder);
-                    if (!folderExists)
-                        Directory.CreateDirectory(folder);
-                    string fileName = folder + "\\outAdmit.txt";
-                    FileProcessor fileprocessor = new FileProcessor(inputClaimFilePath, inputProviderFilePath, fileName);
-                    fileprocessor.ReadAllClaims();
-                }
+                string folder = @"C:\Temp";
+                bool folderExists = Directory.Exists(folder);
+                if (!folderExists)
+                    Directory.CreateDirectory(folder);
+                string fileName = folder + "\\outAdmit.txt";
+                FileProcessor fileprocessor = new FileProcessor(inputClaimFilePath, inputProviderFilePath, fileName);
+                fileprocessor.ReadAllClaims();
             }
             catch(Exception ex)
             {
